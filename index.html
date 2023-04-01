@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+
+    <script>
+        //Keep track of score
+        let playerScore = 0;
+        let computerScore = 0;
+        let computerSelection;
+        let playerSelection;
+
+        game();
+
+        //Main game loop
+         function game() {
+            console.log(playRound ());
+            //log score
+            console.log("Player score: " + playerScore);
+            console.log("AI Score: " + computerScore);
+
+            console.log(playRound ());
+            //log score
+            console.log("Player score: " + playerScore);
+            console.log("AI Score: " + computerScore);
+
+            console.log(playRound ());
+            //log score
+            console.log("Player score: " + playerScore);
+            console.log("AI Score: " + computerScore);
+
+            console.log(playRound ());
+            //log score
+            console.log("Player score: " + playerScore);
+            console.log("AI Score: " + computerScore);
+
+            console.log(playRound ());
+            //log score
+            console.log("Player score: " + playerScore);
+            console.log("AI Score: " + computerScore);
+            console.log("GAME OVER!")
+         }
+
+    // Round function
+        function playRound(playerSelection, computerSelection) {
+
+            //computer chooses its play (getComputerChoice)
+            let getComputerChoice = getRandomInt(3);
+            
+            //choose random play (0-2)
+            if (getComputerChoice === 0) {
+                computerSelection = 'rock';
+            } else if (getComputerChoice === 1) {
+                computerSelection = 'paper';
+            } else if (getComputerChoice === 2) {
+                computerSelection = 'scissors';
+            }
+
+        //player chooses its play
+            //prompt user
+            let playerPrompt = prompt("Choose Rock, Paper, or Scissors");
+            //convert answer to all lower case
+            playerSelection = playerPrompt.toLowerCase();
+            //check for proper answers
+            if (!(playerSelection === 'rock') || !(playerSelection === 'paper') || !(playerSelection === 'scissors')) {
+                console.log("Please choose Rock, Paper, or Scissors");
+            }
+
+        //compare answers
+
+            // if same answer
+            if (computerSelection === playerSelection) {
+                return "Tie!";
+            // if rock beats scissors
+            } else if ((computerSelection === 'rock') && (playerSelection === 'scissors')) {
+                ++computerScore;
+                return "AI WINS!, Rock crushes Scissors";
+            } else if ((playerSelection === 'rock') && (computerSelection === 'scissors')) {
+                ++playerScore;
+                return "PLAYER WINS!, Rock crushes Scissors";
+            }
+            // if paper beats rock
+            else if ((computerSelection === 'paper') && (playerSelection === 'rock')) {
+                ++computerScore;
+                return "AI WINS!, Paper covers Rock";
+            } else if ((playerSelection === 'paper') && (computerSelection === 'rock')) {
+                ++playerScore;
+                return "PLAYER WINS!, Paper covers Rock";
+            }
+            // if scissors beats paper
+            else if ((computerSelection === 'scissors') && (playerSelection === 'paper')) {
+                ++computerScore;
+                return "AI WINS!, Scissors cut Paper";
+            } else if ((playerSelection === 'scissors') && (computerSelection === 'paper')) {
+                ++playerScore;
+                return "PLAYER WINS!, Scissors cut Paper";
+            }
+        }
+
+        //Random number generator (0-2)
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+    </script>
+    
+</body>
+</html>
