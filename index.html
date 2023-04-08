@@ -7,6 +7,17 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div id="buttons">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    <div id="results">
+        <h3 class="score"></h3>
+        <h3 class="playerResult"></h3>
+        <h3 class="computerResult"></h3>
+        <h3 class="gameOver"></h3>
+    </div>
 
     <script>
         //Keep track of score
@@ -15,35 +26,42 @@
         let computerSelection;
         let playerSelection;
 
-        game();
+        //Rock Button
+        const rock = document.querySelector('.rock');
+        rock.addEventListener('click', function() {
+            playerSelection = "rock";
+            game();
+        });
+
+        //Paper Button
+        const paper = document.querySelector('.paper');
+        paper.addEventListener('click', function() {
+            playerSelection = "paper";
+            game();
+        });
+
+        //Scissors Button
+        const scissors = document.querySelector('.scissors');
+        scissors.addEventListener('click', function() {
+            playerSelection = "scissors";
+            game();
+        });
+        const score = document.querySelector(".score");
+        const playerResult = document.querySelector(".playerResult");
+        const computerResult = document.querySelector(".computerResult");
+        const gameOver = document.querySelector(".gameOver");
 
         //Main game loop
+        
          function game() {
-            console.log(playRound ());
-            //log score
-            console.log("Player score: " + playerScore);
-            console.log("AI Score: " + computerScore);
 
-            console.log(playRound ());
-            //log score
-            console.log("Player score: " + playerScore);
-            console.log("AI Score: " + computerScore);
-
-            console.log(playRound ());
-            //log score
-            console.log("Player score: " + playerScore);
-            console.log("AI Score: " + computerScore);
-
-            console.log(playRound ());
-            //log score
-            console.log("Player score: " + playerScore);
-            console.log("AI Score: " + computerScore);
-
-            console.log(playRound ());
-            //log score
-            console.log("Player score: " + playerScore);
-            console.log("AI Score: " + computerScore);
-            console.log("GAME OVER!")
+            // Run game up until score reaches 5
+            if ((playerScore < 5) && (computerScore < 5)) {
+                playRound(playerSelection, computerSelection);
+                //log score
+                playerResult.textContent = ("Player score: " + playerScore);
+                computerResult.textContent = ("AI Score: " + computerScore);
+            }
          }
 
     // Round function
@@ -61,44 +79,39 @@
                 computerSelection = 'scissors';
             }
 
-        //player chooses its play
-            //prompt user
-            let playerPrompt = prompt("Choose Rock, Paper, or Scissors");
-            //convert answer to all lower case
-            playerSelection = playerPrompt.toLowerCase();
-            //check for proper answers
-            if (!(playerSelection === 'rock') || !(playerSelection === 'paper') || !(playerSelection === 'scissors')) {
-                console.log("Please choose Rock, Paper, or Scissors");
-            }
-
         //compare answers
 
             // if same answer
             if (computerSelection === playerSelection) {
-                return "Tie!";
+                score.textContent = "Tie!";
             // if rock beats scissors
             } else if ((computerSelection === 'rock') && (playerSelection === 'scissors')) {
                 ++computerScore;
-                return "AI WINS!, Rock crushes Scissors";
+                score.textContent = "Rock crushes Scissors";
             } else if ((playerSelection === 'rock') && (computerSelection === 'scissors')) {
                 ++playerScore;
-                return "PLAYER WINS!, Rock crushes Scissors";
+                score.textContent = "Rock crushes Scissors";
             }
             // if paper beats rock
             else if ((computerSelection === 'paper') && (playerSelection === 'rock')) {
                 ++computerScore;
-                return "AI WINS!, Paper covers Rock";
+                score.textContent = "Paper covers Rock";
             } else if ((playerSelection === 'paper') && (computerSelection === 'rock')) {
                 ++playerScore;
-                return "PLAYER WINS!, Paper covers Rock";
+                score.textContent = "Paper covers Rock";
             }
             // if scissors beats paper
             else if ((computerSelection === 'scissors') && (playerSelection === 'paper')) {
                 ++computerScore;
-                return "AI WINS!, Scissors cut Paper";
+                score.textContent = "Scissors cut Paper";
             } else if ((playerSelection === 'scissors') && (computerSelection === 'paper')) {
                 ++playerScore;
-                return "PLAYER WINS!, Scissors cut Paper";
+                score.textContent = "Scissors cut Paper";
+            }
+
+            // Check for game completion
+            if ((playerScore === 5) || (computerScore === 5)) {
+                gameOver.textContent = "Game Over! Refresh page to play again";
             }
         }
 
@@ -106,6 +119,7 @@
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
+
     </script>
     
 </body>
